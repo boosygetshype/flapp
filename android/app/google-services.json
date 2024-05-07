@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "405290959027",
+    "project_id": "noteapp-31fda",
+    "storage_bucket": "noteapp-31fda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405290959027:android:4bd0a39a7229f7f335f0c6",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBhNCD0hXw1M4sUScS-1Sd364iHiLUKlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405290959027:android:f9e8f4b6356c5a8b35f0c6",
+        "android_client_info": {
+          "package_name": "com.example.flapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBhNCD0hXw1M4sUScS-1Sd364iHiLUKlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

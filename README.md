@@ -1,16 +1,7 @@
-# flapp
 
-A new Flutter project.
 
-## Getting Started
+07/05/2024
+FirebaseAuth ve FirebaseFirestore kullanarak uygulamama giriş, kayıt, çıkış yapma gibi özellikler ekledim, ayrıca daha önce uygulamaya giriş yapmış bir kullanıcının uygulamayı her açtığında tekrar giriş yapmak zorunda olmaması için gerekli düzenlemelerde bulundum
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![alt](https://en.m.wikipedia.org/wiki/File:Facebook_Logo_2023.png)

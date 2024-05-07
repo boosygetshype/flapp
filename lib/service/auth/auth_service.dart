@@ -27,6 +27,14 @@ class AuthService {
     try {
       final UserCredential userCredential = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
+      await userCredential.user!.sendEmailVerification();
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text(
+              'Doğrulama e-postası gönderildi. Lütfen e-postanızı kontrol edin.'),
+          duration: Durations.extralong4,
+        ),
+      );
 
       if (userCredential.user != null) {
         _registerUser(name: name, email: email, password: password);
@@ -54,6 +62,18 @@ class AuthService {
       final UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null) {
+        if (!userCredential.user!.emailVerified) {
+          scaffoldMessenger.showSnackBar(
+            const SnackBar(
+              content: Text(
+                  'E-postanızı doğrulamadınız. Lütfen e-postanızı kontrol edin ve doğrulama işlemini tamamlayın.'),
+              duration: Durations.extralong4,
+            ),
+          );
+          await firebaseAuth.signOut();
+          return;
+        }
+
         scaffoldMessenger.showSnackBar(
           const SnackBar(
             content: Text("Giriş Başarılı"),

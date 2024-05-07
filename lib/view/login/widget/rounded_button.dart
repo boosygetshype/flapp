@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../../../util/colors/app_colors.dart';
 import '../../../util/padding/padding_ext.dart';
-import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class RoundedButton extends StatelessWidget {

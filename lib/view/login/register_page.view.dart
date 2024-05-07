@@ -1,5 +1,5 @@
-import 'package:flapp/service/auth/auth_service.dart';
-import 'package:flapp/util/routes/app_routes.dart';
+import '../../service/auth/auth_service.dart';
+import '../../util/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 import 'widget/button_tile.dart';

@@ -1,20 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flapp/util/routes/app_routes.dart';
+import '../../util/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class AuthService {
   final userCollection = FirebaseFirestore.instance.collection("Users");
   final firebaseAuth = FirebaseAuth.instance;
 
-  Future<void> _registerUser(
-      {required String name,
-      required String email,
-      required String password}) async {
-    await userCollection
-        .doc()
-        .set({"name": name, "email": email, "password ": password});
-  }
+  // Future<void> _registerUser(
+  //     {required String name,
+  //     required String email,
+  //     required String password}) async {
+  //   await userCollection
+  //       .doc()
+  //       .set({"name": name, "email": email, "password ": password});
+  // }
 
   Future<void> signUp(
       {required BuildContext context,
@@ -37,7 +37,9 @@ class AuthService {
       );
 
       if (userCredential.user != null) {
-        _registerUser(name: name, email: email, password: password);
+        userCollection
+            .doc(userCredential.user!.uid)
+            .set({"name": name, "email": email, "password": password});
 
         navigator.popAndPushNamed(AppRoutes.login);
       }
@@ -92,8 +94,9 @@ class AuthService {
     }
   }
 
-  Future<void> signOut() async {
+  Future<void> signOut(BuildContext context) async {
     final firebaseAuth = FirebaseAuth.instance;
     await firebaseAuth.signOut();
+       Navigator.popAndPushNamed(context, AppRoutes.login);
   }
 }

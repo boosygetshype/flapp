@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flapp/view/home/home_page_view.dart';
+import 'view/home/home_page_view.dart';
 
-import 'package:flapp/view/login/register_page.view.dart';
+import 'view/login/register_page.view.dart';
 
 import 'firebase_options.dart';
 import 'util/constants/main_const.dart';
@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: MainConstants.debugShowCheckedModeBanner,
-      home: user != null ? const HomePage() : const RegisterPage(),
+      home: user != null ?  HomePage() : const RegisterPage(),
       routes: AppRoutes.routes,
     );
   }

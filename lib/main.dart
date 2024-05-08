@@ -1,13 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'view_model/main/main_view_model.dart';
+import 'package:provider/provider.dart';
 import 'view/home/home_page_view.dart';
-
 import 'view/login/register_page.view.dart';
-
 import 'firebase_options.dart';
 import 'util/constants/main_const.dart';
 import 'util/routes/app_routes.dart';
-
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -20,31 +18,26 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({
     super.key,
   });
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  User? user;
-
-  @override
-  void initState() {
-    user = FirebaseAuth.instance.currentUser;
-    
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: MainConstants.debugShowCheckedModeBanner,
-      home: user != null ?  HomePage() : const RegisterPage(),
-      routes: AppRoutes.routes,
+    return ChangeNotifierProvider(
+      create: (context) => AuthViewModel(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: MainConstants.debugShowCheckedModeBanner,
+        home: Consumer<AuthViewModel>(
+          builder: (context, authViewModel, _) {
+            return authViewModel.isAuthenticated
+                ? HomePage()
+                : const RegisterPage();
+          },
+        ),
+        routes: AppRoutes.routes,
+      ),
     );
   }
 }

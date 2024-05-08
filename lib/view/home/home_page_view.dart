@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flapp/util/padding/padding_ext.dart';
-import 'package:flapp/view/home/widget/drawer_item.dart';
+import '../../util/padding/padding_ext.dart';
+import 'widget/drawer_item.dart';
 import '../../util/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 

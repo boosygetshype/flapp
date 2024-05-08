@@ -1,4 +1,4 @@
-import 'package:flapp/view/profile/profile_page_view.dart';
+import '../../view/profile/profile_page_view.dart';
 
 import '../../service/auth/auth_service.dart';
 import '../../view/home/home_page_view.dart';

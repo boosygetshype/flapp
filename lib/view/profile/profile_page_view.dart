@@ -1,5 +1,5 @@
-import 'package:flapp/util/colors/app_colors.dart';
-import 'package:flapp/util/padding/padding_ext.dart';
+import '../../util/colors/app_colors.dart';
+import '../../util/padding/padding_ext.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -8,6 +8,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton:
+          FloatingActionButton(onPressed: () => Navigator.pop(context)),
       backgroundColor: AppColors.kScaffoldBGColor,
       body: SingleChildScrollView(
         child: SizedBox(

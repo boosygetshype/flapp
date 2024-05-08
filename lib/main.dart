@@ -1,4 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flapp/view/profile/profile_page_view.dart';
+import 'package:flapp/view_model/profile/profile_view_model.dart';
 import 'view_model/main/main_view_model.dart';
 import 'package:provider/provider.dart';
 import 'view/home/home_page_view.dart';
@@ -25,8 +27,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AuthViewModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          child: ProfilePage(),
+          create: (_) => ProfileViewModel(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AuthViewModel(),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: MainConstants.debugShowCheckedModeBanner,
         home: Consumer<AuthViewModel>(

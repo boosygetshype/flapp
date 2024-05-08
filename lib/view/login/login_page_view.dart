@@ -1,3 +1,4 @@
+import 'package:flapp/view/login/widget/app_title.dart';
 import '../../model/login/firebase_login_model.dart';
 import '../../view_model/login/login_view_model.dart';
 import 'package:provider/provider.dart';
@@ -31,16 +32,8 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: context.height * 0.09,
                     ),
-                    Text(
-                      "Flapp",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(color: AppColors.kPrimaryColor),
-                    ),
-                    SizedBox(
-                      height: context.height * 0.09,
-                    ),
+                    const AppTitle(),
+                    const _SizedBoxItem(),
                     CustomTextField(
                       focusNode: loginViewModel.focusNode1,
                       onEditingComplete: () {
@@ -59,8 +52,11 @@ class LoginPage extends StatelessWidget {
                       controller: loginViewModel.tPasswordController,
                       obscureText: loginViewModel.textFieldSecure,
                       prefixIcon: IconButton(
-                          onPressed: () => loginViewModel.obscureText(context),
-                          icon: Icon(loginViewModel.getPrefixIcon())),
+                        onPressed: () => loginViewModel.obscureText(context),
+                        icon: Icon(
+                          loginViewModel.getPrefixIcon(),
+                        ),
+                      ),
                       labelText: "Password",
                     ),
                     const ForgotPassItem(),
@@ -73,35 +69,7 @@ class LoginPage extends StatelessWidget {
                       },
                       buttonText: "Sign In",
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: context.height * 0.03),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text: "You don't have a acc?",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: Colors.white),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () => Navigator.popAndPushNamed(
-                                context, AppRoutes.register),
-                            child: Text(
-                              " Lets sign up",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: AppColors.kSecondaryColor),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
+                   const _GoSignUpItem(),
                     const DividerItems(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -120,6 +88,54 @@ class LoginPage extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _GoSignUpItem extends StatelessWidget {
+  const _GoSignUpItem();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          EdgeInsets.symmetric(vertical: context.height * 0.03),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RichText(
+            text: TextSpan(
+              text: "You don't have a acc?",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.white),
+            ),
+          ),
+          GestureDetector(
+            onTap: () => Navigator.popAndPushNamed(
+                context, AppRoutes.register),
+            child: Text(
+              " Lets sign up",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: AppColors.kSecondaryColor),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _SizedBoxItem extends StatelessWidget {
+  const _SizedBoxItem();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.height * 0.09,
     );
   }
 }

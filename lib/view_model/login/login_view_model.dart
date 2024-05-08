@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../service/auth/auth_service.dart';
 
 class LoginViewModel extends ChangeNotifier {
-    final FocusNode focusNode1 = FocusNode();
+  final FocusNode focusNode1 = FocusNode();
   final FocusNode focusNode2 = FocusNode();
 
   @override
@@ -13,6 +13,7 @@ class LoginViewModel extends ChangeNotifier {
     focusNode1.dispose();
     focusNode2.dispose();
   }
+
   final TextEditingController tEmailController = TextEditingController();
   final TextEditingController tPasswordController = TextEditingController();
   bool textFieldSecure = false;
@@ -27,6 +28,7 @@ class LoginViewModel extends ChangeNotifier {
 
   obscureText(BuildContext context) {
     if (tPasswordController.text.isEmpty == true) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       return ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: AppColors.kScaffoldBGColor,

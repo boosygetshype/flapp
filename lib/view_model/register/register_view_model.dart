@@ -4,22 +4,16 @@ import 'package:flutter/material.dart';
 import '../../service/auth/auth_service.dart';
 
 class RegisterViewModel extends ChangeNotifier {
-
-
- final FocusNode focusNode1 = FocusNode();
+  final FocusNode focusNode1 = FocusNode();
   final FocusNode focusNode2 = FocusNode();
-  final FocusNode focusNode3 = FocusNode();  
-  
-   @override
+  final FocusNode focusNode3 = FocusNode();
+
+  @override
   void dispose() {
     focusNode1.dispose();
     focusNode2.dispose();
     super.dispose();
   }
-
- 
-
-
 
   final TextEditingController tEmailController = TextEditingController();
   final TextEditingController tPasswordController = TextEditingController();
@@ -27,6 +21,7 @@ class RegisterViewModel extends ChangeNotifier {
   bool textFieldSecure = false;
   obscureText(BuildContext context) {
     if (tPasswordController.text.isEmpty == true) {
+      ScaffoldMessenger.of(context).clearSnackBars();
       return ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           backgroundColor: AppColors.kScaffoldBGColor,

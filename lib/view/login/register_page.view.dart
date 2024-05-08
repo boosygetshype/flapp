@@ -1,13 +1,10 @@
+import 'package:flapp/view/login/widget/app_title.dart';
 import '../../model/register/firebase_register_mode.dart';
 import '../../view_model/register/register_view_model.dart';
 import 'package:provider/provider.dart';
-
-
 import '../../util/routes/app_routes.dart';
 import 'package:flutter/material.dart';
-
 import 'widget/button_tile.dart';
-
 import '../../util/colors/app_colors.dart';
 import '../../util/padding/padding_ext.dart';
 import 'widget/custom_text_field.dart';
@@ -34,16 +31,8 @@ class RegisterPage extends StatelessWidget {
                     SizedBox(
                       height: context.height * 0.09,
                     ),
-                    Text(
-                      "Flapp",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(color: AppColors.kPrimaryColor),
-                    ),
-                    SizedBox(
-                      height: context.height * 0.09,
-                    ),
+                   const AppTitle(),
+                    const _SizedBoxItem(),
                     CustomTextField(
                       focusNode: registerViewModel.focusNode1,
                       onEditingComplete: () {
@@ -90,32 +79,7 @@ class RegisterPage extends StatelessWidget {
                       },
                       buttonText: "Sign Up",
                     ),
-                    Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: context.height * 0.03),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "You already have an acc?",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
-                                  .copyWith(color: Colors.white),
-                            ),
-                            GestureDetector(
-                              onTap: () => Navigator.popAndPushNamed(
-                                  context, AppRoutes.login),
-                              child: Text(
-                                " Lets sign in",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
-                                    .copyWith(color: AppColors.kSecondaryColor),
-                              ),
-                            )
-                          ],
-                        )),
+                    const _GoToSignInItem(),
                     const DividerItems(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -134,6 +98,51 @@ class RegisterPage extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _GoToSignInItem extends StatelessWidget {
+  const _GoToSignInItem();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: context.height * 0.03),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "You already have an acc?",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.white),
+            ),
+            GestureDetector(
+              onTap: () => Navigator.popAndPushNamed(
+                  context, AppRoutes.login),
+              child: Text(
+                " Lets sign in",
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: AppColors.kSecondaryColor),
+              ),
+            )
+          ],
+        ));
+  }
+}
+
+class _SizedBoxItem extends StatelessWidget {
+  const _SizedBoxItem();
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: context.height * 0.09,
     );
   }
 }

@@ -53,50 +53,60 @@ class AuthService {
     }
   }
 
-  Future<void> signIn(
-      {required BuildContext context,
-      required String email,
-      required String password}) async {
-    final navigator = Navigator.of(context);
-    final scaffoldMessenger = ScaffoldMessenger.of(context);
+ Future<void> signIn(
+    {required BuildContext context,
+    required String email,
+    required String password}) async {
+  final navigator = Navigator.of(context);
+  final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-    try {
-      final UserCredential userCredential = await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
-      if (userCredential.user != null) {
-        if (!userCredential.user!.emailVerified) {
-          scaffoldMessenger.showSnackBar(
-            const SnackBar(
-              content: Text(
-                  'E-postanızı doğrulamadınız. Lütfen e-postanızı kontrol edin ve doğrulama işlemini tamamlayın.'),
-              duration: Durations.extralong4,
-            ),
-          );
-          await firebaseAuth.signOut();
-          return;
-        }
-
-        scaffoldMessenger.showSnackBar(
-          const SnackBar(
-            content: Text("Giriş Başarılı"),
-            duration: Durations.extralong4,
-          ),
-        );
-        navigator.popAndPushNamed(AppRoutes.home);
-      }
-    } catch (e) {
+  try {
+    UserCredential userCredential = await firebaseAuth
+        .signInWithEmailAndPassword(email: email, password: password);
+    if (userCredential.user == null) {
       scaffoldMessenger.showSnackBar(
-        SnackBar(
-          content: Text(e.toString()),
+        const SnackBar(
+          content: Text("Giriş başarısız. Lütfen bilgilerinizi kontrol edin."),
           duration: Durations.extralong4,
         ),
       );
+      return;
     }
+
+    if (!userCredential.user!.emailVerified) {
+      userCredential.user!.sendEmailVerification();
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text(
+              'E-postanızı doğrulamadınız. Lütfen e-postanızı kontrol edin ve doğrulama işlemini tamamlayın.'),
+          duration: Durations.extralong4,
+        ),
+      );
+      await firebaseAuth.signOut();
+      return;
+    }
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(
+        content: Text("Giriş Başarılı"),
+        duration: Durations.extralong4,
+      ),
+    );
+    navigator.popAndPushNamed(AppRoutes.home);
+  } catch (e) {
+    scaffoldMessenger.showSnackBar(
+      SnackBar(
+        content: Text(e.toString()),
+        duration: Durations.extralong4,
+      ),
+    );
   }
+}
+
 
   Future<void> signOut(BuildContext context) async {
     final firebaseAuth = FirebaseAuth.instance;
     await firebaseAuth.signOut();
-       Navigator.popAndPushNamed(context, AppRoutes.login);
+    Navigator.popAndPushNamed(context, AppRoutes.login);
   }
 }

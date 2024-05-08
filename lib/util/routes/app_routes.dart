@@ -20,6 +20,6 @@ class AppRoutes {
     login: (context) => const LoginPage(),
     register: (context) => const RegisterPage(),
     home: (context) => HomePage(),
-     profile: (context) => const ProfilePage(),
+    profile: (context) => ProfilePage(),
   };
 }

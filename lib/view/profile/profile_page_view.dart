@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flapp/util/colors/app_colors.dart';
 import 'package:flapp/util/padding/padding_ext.dart';
 import 'package:flapp/view_model/profile/profile_view_model.dart';
@@ -46,10 +47,17 @@ class ProfilePage extends StatelessWidget {
                               padding: EdgeInsets.symmetric(
                                   horizontal: context.width * 0.05,
                                   vertical: context.height * 0.05),
-                              child: const ClipOval(
-                                child: Image(
-                                  image: AssetImage("assets/user.jpeg"),
-                                ),
+                              child: InkWell(
+                                onTap: () =>
+                                    profileViewModel.uploadFromCamera(),
+                                child: profileViewModel.downloadUrl != null
+                                    ? ClipOval(
+                                        child: Image.network(
+                                            profileViewModel.downloadUrl!),
+                                      )
+                                    : ClipOval(
+                                        child: Image.asset("assets/user.jpeg"),
+                                      ),
                               ),
                             ),
                             Text(

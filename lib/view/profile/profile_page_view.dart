@@ -13,53 +13,67 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-      ),
-      backgroundColor: AppColors.kScaffoldBGColor,
-      body: Consumer<ProfileViewModel>(
-        builder: (context, profileViewModel, _) {
-          return profileViewModel.userProfile == null
-              ? const Center(child: CircularProgressIndicator())
-              : SingleChildScrollView(
-                  child: SizedBox(
-                    height: context.height,
-                    width: context.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: context.width * 0.05,
-                              vertical: context.height * 0.05),
-                          child: const CircleAvatar(
-                            maxRadius: 50,
-                            backgroundImage: AssetImage("assets/user.jpeg"),
-                          ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.kScaffoldBGColor,
+        body: Consumer<ProfileViewModel>(
+          builder: (context, profileViewModel, _) {
+            return profileViewModel.userProfile == null
+                ? const Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
+                    child: SizedBox(
+                      height: context.height,
+                      width: context.width,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: context.height * 0.01,
+                            horizontal: context.width * 0.01),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                IconButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  icon: const Icon(
+                                    Icons.arrow_back_ios_new_outlined,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: context.width * 0.05,
+                                  vertical: context.height * 0.05),
+                              child: const ClipOval(
+                                child: Image(
+                                  image: AssetImage("assets/user.jpeg"),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "İsim: ${profileViewModel.userProfile?.name}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(color: Colors.white),
+                            ),
+                            SizedBox(height: context.height * 0.01),
+                            Text(
+                              "Email: ${profileViewModel.userProfile?.email}",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(color: Colors.white),
+                            ),
+                          ],
                         ),
-                        Text(
-                          "İsim: ${profileViewModel.userProfile?.name}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(color: Colors.white),
-                        ),
-                        SizedBox(height: context.height * 0.01),
-                        Text(
-                          "Email: ${profileViewModel.userProfile?.email}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(color: Colors.white),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-        },
+                  );
+          },
+        ),
       ),
     );
   }

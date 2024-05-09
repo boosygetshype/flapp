@@ -14,6 +14,7 @@ class MyDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
+            
             decoration: const BoxDecoration(),
             child: Center(
               child: Text(
@@ -26,13 +27,23 @@ class MyDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.person_outlined),
-            title: const Text("Profile"),
-            onTap: () => Navigator.popAndPushNamed(context, AppRoutes.profile)
-          ),
+              leading: const Icon(
+                Icons.person_outlined,
+                color: AppColors.kSecondaryColor,
+              ),
+              title: const Text(
+                "Profile",
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () =>
+                  Navigator.popAndPushNamed(context, AppRoutes.profile)),
           ListTile(
-            leading: const Icon(Icons.logout_outlined),
-            title: const Text("Log out"),
+            leading: const Icon(Icons.logout_outlined,
+                color: AppColors.kSecondaryColor),
+            title: const Text(
+              "Log out",
+              style: TextStyle(color: Colors.white),
+            ),
             onTap: () => AuthService().signOut(context),
           ),
         ],

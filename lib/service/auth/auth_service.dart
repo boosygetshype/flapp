@@ -40,7 +40,7 @@ class AuthService {
       if (userCredential.user != null) {
         userCollection
             .doc(userCredential.user!.uid)
-            .set({"name": name, "email": email, "password": password});
+            .set({"name": name, "email": email, "password": password, "profilePhotoUrl" : ""});
 
         navigator.popAndPushNamed(AppRoutes.login);
       }

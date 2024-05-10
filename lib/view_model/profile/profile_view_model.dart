@@ -19,8 +19,8 @@ class ProfileViewModel extends ChangeNotifier {
 
   ProfileViewModel() {
     _init();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) => getUrl());
-    notifyListeners();
+
+    getUrl();
   }
 
   Future<void> _init() async {
@@ -50,6 +50,10 @@ class ProfileViewModel extends ChangeNotifier {
     String url = await uploadTask.snapshot.ref.getDownloadURL();
 
     downloadUrl = url;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .update({'profilePhotoUrl': downloadUrl});  
 
     notifyListeners();
   }

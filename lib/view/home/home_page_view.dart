@@ -41,6 +41,7 @@ class HomePage extends StatelessWidget {
                       SizedBox(
                         width: context.width * 0.1,
                       ),
+                      Text(user!.uid)
                     ],
                   )
                 ],
